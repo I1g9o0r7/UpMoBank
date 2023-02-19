@@ -89,12 +89,15 @@ public class Login extends AppCompatActivity {
                                         editor.putString("name", name);
                                         editor.putString("email", email);
                                         editor.putString("apiKey", apiKey);
+                                        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" + apiKey);
                                         editor.apply();
 
 
                                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                         startActivity(intent);
                                         finish();
+                                    } else{
+                                        Toast.makeText(Login.this, message, Toast.LENGTH_SHORT).show();
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
