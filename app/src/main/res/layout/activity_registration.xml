@@ -79,5 +79,16 @@
         android:layout_height="wrap_content"
         android:text="@string/submit" />
 
+    <TextView
+        android:id="@+id/loginNow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:padding="20dp"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:text="@string/click_here_to_sign_in" />
+
 
 </LinearLayout>

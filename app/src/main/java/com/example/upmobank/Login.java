@@ -65,14 +65,11 @@ public class Login extends AppCompatActivity {
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
                 String url = "http://192.168.3.4/login-registration-android/login.php"; //http://192.168.3.4"; //http://login-registration-android //http://login-registration-android
 
-                System.out.println("-------------+++++++++++++++++++++++++++++----------------------------------------" + url);
-
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
                                 progressBar.setVisibility(View.GONE);
-                                System.out.println("-------------+++++++++++++++++++++++++++++----------------------------------------" + response);
                                 try {
                                     JSONObject jsonObject = new JSONObject(response);
                                     String status = jsonObject.getString("status");
@@ -89,7 +86,6 @@ public class Login extends AppCompatActivity {
                                         editor.putString("name", name);
                                         editor.putString("email", email);
                                         editor.putString("apiKey", apiKey);
-                                        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" + apiKey);
                                         editor.apply();
 
 
@@ -97,7 +93,9 @@ public class Login extends AppCompatActivity {
                                         startActivity(intent);
                                         finish();
                                     } else{
-                                        Toast.makeText(Login.this, message, Toast.LENGTH_SHORT).show();
+//                                        Toast.makeText(Login.this, message, Toast.LENGTH_SHORT).show();
+                                        textViewError.setText(message);
+                                        textViewError.setVisibility(View.VISIBLE);
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
