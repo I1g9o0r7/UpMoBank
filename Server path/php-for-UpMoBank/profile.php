@@ -1,7 +1,7 @@
 <?php
 if(!empty($_POST['email']) && !empty($_POST['apiKey'])){
     $email = $_POST['email'];
-    $apiKey = $_POST['apiKey']
+    $apiKey = $_POST['apiKey'];
     $result = array();
     $con = mysqli_connect("localhost","root","","UpMoBank");
     if($con){

@@ -1,14 +1,14 @@
 <?php
-if(!empty($_POST['email']) && !empty($_POST['apiKey'])){
-    $email = $_POST['email'];
+if(!empty($_POST['phone']) && !empty($_POST['apiKey'])){
+    $phone = $_POST['phone'];
     $apiKey = $_POST['apiKey'];
-    $con = mysqli_connect("localhost","root","","UpMoBank");
+    $con = mysqli_connect("localhost","root","","dbUpMoBank");
     if($con){
-        $sql = "select * from users where email = '".$email."' and apiKey = '".$apiKey."'";
+        $sql = "select * from accounts where phone = '".$phone."' and apiKey = '".$apiKey."'";
         $res = mysqli_query($con, $sql);
         if(mysqli_num_rows($res) != 0){
             $row = mysqli_fetch_assoc($res);
-            $sqlUpdate = "update users set apiKey = '' where email = '".$email."'";
+            $sqlUpdate = "update accounts set apiKey = '' where phone = '".$phone."'";
             if(mysqli_query($con, $sqlUpdate)){
                 echo "success";
             }else echo "Login failed";
