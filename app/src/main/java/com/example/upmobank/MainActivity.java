@@ -30,9 +30,10 @@ public class MainActivity extends AppCompatActivity {
 
     TextView textViewUABalance, textViewUSBalance, textViewEUBalance;
     SharedPreferences sharedPreferences;
-    Button buttonLogout, buttonSetings, buttonSendMoney;
+    Button buttonLogout, buttonSetings, buttonSendMoney, buttonSupport;
     Switch switchlock;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         buttonSendMoney = findViewById(R.id.sendMoney);
         buttonLogout = findViewById(R.id.logout);
         buttonSetings = findViewById(R.id.setings);
+        buttonSupport = findViewById(R.id.buttonSupport);
 
         sharedPreferences = getSharedPreferences("MyAppName", MODE_PRIVATE);
         if (sharedPreferences.getString("logged", "false").equals("false")) {
@@ -76,10 +78,38 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getBaseContext(), "false", Toast.LENGTH_SHORT).show();
                     buttonSendMoney.setOnClickListener(null);
                     buttonSetings.setOnClickListener(null);
+                    buttonLogout.setOnClickListener(null);
                 } else {
                     Toast.makeText(getBaseContext(), "true", Toast.LENGTH_SHORT).show();
                     setButtonFunctions();
                 }
+            }
+        });
+
+    }
+
+    private void setButtonFunctions() {
+
+        buttonSendMoney.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getApplicationContext(), SendMoney.class);
+                startActivity(intent);
+                //finish();
+
+            }
+        });
+
+        buttonSetings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                Intent intent = new Intent(getApplicationContext(), Setings.class);
+                startActivity(intent);
+                //finish();
+
             }
         });
 
@@ -89,14 +119,11 @@ public class MainActivity extends AppCompatActivity {
 
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
                 String url = "http://192.168.3.4/php-for-UpMoBank/logout.php"; //http://192.168.3.4"; //http://login-registration-android //http://login-registration-android
-                String url2 = "http://192.168.3.4/php-for-UpMoBank/encode.php";
 
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-
-                                System.out.println("______________________________________________________" + response);
 
                                 if (response.equals("success")) {
                                     SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -142,55 +169,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-    private void setButtonFunctions() {
-
-        buttonSendMoney.setOnClickListener(new View.OnClickListener() {
+        buttonSupport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent intent = new Intent(getApplicationContext(), SendMoney.class);
+                Intent intent = new Intent(getApplicationContext(), Support.class);
                 startActivity(intent);
-                finish();
-
-            }
-        });
-
-        buttonSetings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-//                RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-//                String url = "http://192.168.3.4/login-registration-android/profile.php"; //http://192.168.3.4"; //http://login-registration-android //http://login-registration-android
-//                StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-//                        new Response.Listener<String>() {
-//                            @Override
-//                            public void onResponse(String response) {
-//
-//                                System.out.println("================================================================================"+response);
-//                                textViewFetchResult.setText(response);
-//                                textViewFetchResult.setVisibility(View.VISIBLE);
-//                            }
-//                        }, new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        error.printStackTrace();
-//                    }
-//                }) {
-//                    protected Map<String, String> getParams() {
-//                        Map<String, String> paramV = new HashMap<>();
-//                        paramV.put("email", sharedPreferences.getString("email", ""));
-//                        paramV.put("apiKey", sharedPreferences.getString("apiKey", ""));
-//                        return paramV;
-//                    }
-//                };
-//                queue.add(stringRequest);
+                //finish();
             }
         });
 
     }
-
 
 }

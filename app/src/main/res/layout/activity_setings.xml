@@ -10,7 +10,7 @@
 
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageViewBackToMain2"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
@@ -36,7 +36,7 @@
             android:text="@string/accounts_code" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/textViewAccountCode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
@@ -61,7 +61,7 @@
             android:text="@string/full_name" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/textViewFirstName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
@@ -69,7 +69,7 @@
             android:text="TextView" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/textViewLastName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
@@ -95,7 +95,7 @@
             android:text="@string/hange_email" />
 
         <EditText
-            android:id="@+id/editTextTextEmailAddress"
+            android:id="@+id/editTextChangeEmailAddress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -121,7 +121,7 @@
             android:text="@string/change_phone" />
 
         <EditText
-            android:id="@+id/editTextPhone2"
+            android:id="@+id/editTextChangeNumberPhone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -131,7 +131,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_marginTop="25dp"
         android:layout_marginStart="25dp"
         android:layout_marginEnd="25dp"
@@ -139,21 +139,20 @@
 
         <TextView
             android:id="@+id/textView11"
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
             android:layout_weight="1"
-            android:text="@string/change_password" />
+            android:text="@string/change_password"
+            android:textSize="18sp" />
 
         <EditText
-            android:id="@+id/editTextTextPassword"
+            android:id="@+id/editTextChangePassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
             android:inputType="textPassword" />
     </LinearLayout>
-
     <Button
         android:id="@+id/buttonChange"
         android:layout_width="wrap_content"

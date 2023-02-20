@@ -263,5 +263,12 @@
             android:text="@string/setings" />
     </LinearLayout>
 
+    <Button
+        android:id="@+id/buttonSupport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="Support" />
+
 
 </LinearLayout>
