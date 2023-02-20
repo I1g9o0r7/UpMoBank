@@ -29,4 +29,15 @@
     <string name="setings">Setings</string>
     <string name="your_balance">Your balance</string>
     <string name="send">Send</string>
+    <string name="enter_phone">Enter phone</string>
+    <string name="enter_first_name">Enter first name</string>
+    <string name="enter_last_name">Enter last name</string>
+    <string name="enter_card_or_phone">Enter card or phone</string>
+    <string name="amount_of_money">Amount Of Money</string>
+    <string name="accounts_code">Accounts code</string>
+    <string name="full_name">Full name:</string>
+    <string name="change_phone">Change phone:</string>
+    <string name="hange_email">Сhange email:</string>
+    <string name="change_password">Change password:</string>
+    <string name="change">Change</string>
 </resources>

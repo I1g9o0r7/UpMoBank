@@ -23,10 +23,11 @@
         android:layout_marginBottom="10dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/email"
+            android:id="@+id/phone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="@string/enter_email" />
+            android:inputType="phone"
+            android:hint="@string/enter_phone" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -40,6 +41,7 @@
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textPassword"
             android:hint="@string/enter_password" />
     </com.google.android.material.textfield.TextInputLayout>
 

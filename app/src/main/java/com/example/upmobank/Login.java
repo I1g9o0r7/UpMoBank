@@ -2,6 +2,7 @@ package com.example.upmobank;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -27,20 +28,22 @@ import java.util.Map;
 
 public class Login extends AppCompatActivity {
     TextView textViewRegisterNow;
-    TextInputEditText textInputEditTextEmail, textInputEditTextPassword;
+    TextInputEditText textInputEditTextPhone, textInputEditTextPassword;
     Button buttonSubmit;
 
-    String name, email, password, apiKey;
+    String numCard, phone, password, firstName, lastName, email, apiKey;
+    String balanceUA, balanceUS, balanceEU;
     TextView textViewError;
     ProgressBar progressBar;
     SharedPreferences sharedPreferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        textInputEditTextEmail = findViewById(R.id.email);
+        textInputEditTextPhone = findViewById(R.id.phone);
         textInputEditTextPassword = findViewById(R.id.password);
 
         textViewError = findViewById(R.id.error);
@@ -48,7 +51,7 @@ public class Login extends AppCompatActivity {
 
         sharedPreferences = getSharedPreferences("MyAppName", MODE_PRIVATE);
 
-        if(sharedPreferences.getString("logged", "false").equals("true")){
+        if (sharedPreferences.getString("logged", "false").equals("true")) {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
             finish();
@@ -60,31 +63,44 @@ public class Login extends AppCompatActivity {
             public void onClick(View view) {
                 textViewError.setVisibility(View.GONE);
                 progressBar.setVisibility(View.VISIBLE);
-                email = String.valueOf(textInputEditTextEmail.getText());
+                phone = String.valueOf(textInputEditTextPhone.getText());
                 password = String.valueOf(textInputEditTextPassword.getText());
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                String url = "http://192.168.3.4/login-registration-android/login.php"; //http://192.168.3.4"; //http://login-registration-android //http://login-registration-android
+                String url = "http://192.168.3.4/php-for-UpMoBank/login.php"; //http://192.168.3.4"; //http://login-registration-android //http://login-registration-android
 
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
                                 progressBar.setVisibility(View.GONE);
+                                System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++=" + response);
                                 try {
                                     JSONObject jsonObject = new JSONObject(response);
                                     String status = jsonObject.getString("status");
                                     String message = jsonObject.getString("message");
-                                    if(status.equals("success")){
-                                        name = jsonObject.getString("name");
+                                    if (status.equals("success")) {
+                                        numCard = jsonObject.getString("numCard");
+                                        phone = jsonObject.getString("phone");
+                                        firstName = jsonObject.getString("firstName");
+                                        lastName = jsonObject.getString("lastName");
                                         email = jsonObject.getString("email");
+                                        balanceUA = jsonObject.getString("balanceUA");
+                                        balanceUS = jsonObject.getString("balanceUS");
+                                        balanceEU = jsonObject.getString("balanceEU");
                                         apiKey = jsonObject.getString("apiKey");
-
 
 
                                         SharedPreferences.Editor editor = sharedPreferences.edit();
                                         editor.putString("logged", "true");
-                                        editor.putString("name", name);
+
+                                        editor.putString("numCard", numCard);
+                                        editor.putString("phone", phone);
+                                        editor.putString("firstName", firstName);
+                                        editor.putString("lastName", lastName);
                                         editor.putString("email", email);
+                                        editor.putString("balanceUA", balanceUA);
+                                        editor.putString("balanceUS", balanceUS);
+                                        editor.putString("balanceEU", balanceEU);
                                         editor.putString("apiKey", apiKey);
                                         editor.apply();
 
@@ -92,7 +108,7 @@ public class Login extends AppCompatActivity {
                                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                         startActivity(intent);
                                         finish();
-                                    } else{
+                                    } else {
 //                                        Toast.makeText(Login.this, message, Toast.LENGTH_SHORT).show();
                                         textViewError.setText(message);
                                         textViewError.setVisibility(View.VISIBLE);
@@ -111,7 +127,7 @@ public class Login extends AppCompatActivity {
                 }) {
                     protected Map<String, String> getParams() {
                         Map<String, String> paramV = new HashMap<>();
-                        paramV.put("email", email);
+                        paramV.put("phone", phone);
                         paramV.put("password", password);
                         return paramV;
                     }

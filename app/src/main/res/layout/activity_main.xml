@@ -12,7 +12,6 @@
         android:id="@+id/textViewExchangeRates"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:gravity="center"
         android:text="@string/exchange_rates"
         android:textSize="19sp" />
@@ -263,40 +262,6 @@
             android:layout_marginStart="25dp"
             android:text="@string/setings" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="20dp"
-        android:padding="10dp"
-        android:text="@string/name"
-        android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="20dp"
-        android:padding="10dp"
-        android:text="@string/email"
-        android:textSize="20sp" />
-
-
-    <TextView
-        android:id="@+id/fetchResult"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="20dp"
-        android:padding="10dp"
-        android:textSize="20sp"
-        android:visibility="gone" />
 
 
 </LinearLayout>

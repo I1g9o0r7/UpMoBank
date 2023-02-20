@@ -16,21 +16,21 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 public class SendMoney extends AppCompatActivity {
-
-    private Spinner spinnerCurrencyСhoice, spinnerMethodsSendChoice;
-    private TextView textViewAmountOfMoney, textViewSimbolBalance;
+    SharedPreferences sharedPreferences;
+    Spinner spinnerCurrencyСhoice, spinnerMethodsSendChoice;
+    TextView textViewAmountOfMoney, textViewSimbolBalance;
 
     ImageView imageViewBackToMain;
 
-    SharedPreferences sharedPreferences;
-    private EditText editTextMethodSendMoney;
-    private String[] currency = { "UA", "US", "EU"};
 
-    private String[] methodsSend = { "Phone", "Card"};
+    EditText editTextMethodSendMoney;
+    String[] currency = {"UA", "US", "EU"};
 
-    private String currencyItem, methodsSendItem;
+    String[] methodsSend = {"Phone", "Card"};
 
-    private Button buttonSendMoney;
+    String currencyItem, methodsSendItem;
+
+    Button buttonSendMoney;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -53,7 +53,6 @@ public class SendMoney extends AppCompatActivity {
         choiceMethodSend();
 
 
-
         buttonSendMoney.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,20 +66,20 @@ public class SendMoney extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 // Получаем выбранный объект
-                String item = (String)parent.getItemAtPosition(position);
+                String item = (String) parent.getItemAtPosition(position);
 
-//                if(item.equals("UA")){
-//                    textViewAmountOfMoney.setText("" + MainActivity.acc.getBalanceUA());
-//                    textViewSimbolBalance.setText(R.string.uaSymbol);
-//                }
-//                if(item.equals("US")){
-//                    textViewAmountOfMoney.setText("" + MainActivity.acc.getBalanceUS());
-//                    textViewSimbolBalance.setText(R.string.usSymbol);
-//                }
-//                if(item.equals("EU")){
-//                    textViewAmountOfMoney.setText("" + MainActivity.acc.getBalanceEU());
-//                    textViewSimbolBalance.setText(R.string.euSymbol);
-//                }
+                if (item.equals("UA")) {
+                    textViewAmountOfMoney.setText("" + sharedPreferences.getString("balanceUA", ""));
+                    textViewSimbolBalance.setText(R.string.uaSymbol);
+                }
+                if (item.equals("US")) {
+                    textViewAmountOfMoney.setText("" + sharedPreferences.getString("balanceUS", ""));
+                    textViewSimbolBalance.setText(R.string.usSymbol);
+                }
+                if (item.equals("EU")) {
+                    textViewAmountOfMoney.setText("" + sharedPreferences.getString("balanceEU", ""));
+                    textViewSimbolBalance.setText(R.string.euSymbol);
+                }
                 //editTextMethodSendMoney.setHint(item);
             }
 
@@ -103,13 +102,12 @@ public class SendMoney extends AppCompatActivity {
 
     }
 
-
-
     private void choiceCurrency() {
         ArrayAdapter<String> adapterCurrency = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, currency);
         adapterCurrency.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCurrencyСhoice.setAdapter(adapterCurrency);
     }
+
     private void choiceMethodSend() {
         ArrayAdapter<String> adapterMethodsSend = new ArrayAdapter(this, android.R.layout.simple_spinner_item, methodsSend);
         adapterMethodsSend.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

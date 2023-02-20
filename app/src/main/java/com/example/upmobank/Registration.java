@@ -2,6 +2,7 @@ package com.example.upmobank;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -23,18 +24,21 @@ import java.util.Map;
 
 public class Registration extends AppCompatActivity {
 
-    TextInputEditText textInputEditTextName, textInputEditTextEmail, textInputEditTextPassword;
+    TextInputEditText textInputEditTextFirstName, textInputEditTextLastName, textInputEditTextPhone, textInputEditTextEmail, textInputEditTextPassword;
     Button buttonSubmit;
-    String name, email, password;
+    String firstName, lastName, phone, email, password, numCard;
     TextView textViewError, textViewLoginNow;
     ProgressBar progressBar;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-        textInputEditTextName = findViewById(R.id.name);
+        textInputEditTextFirstName = findViewById(R.id.firstName);
+        textInputEditTextLastName = findViewById(R.id.lastName);
+        textInputEditTextPhone = findViewById(R.id.phone);
         textInputEditTextEmail = findViewById(R.id.email);
         textInputEditTextPassword = findViewById(R.id.password);
         textViewLoginNow = findViewById(R.id.loginNow);
@@ -49,12 +53,17 @@ public class Registration extends AppCompatActivity {
 
                 textViewError.setVisibility(View.GONE);
                 progressBar.setVisibility(View.VISIBLE);
-                name = String.valueOf(textInputEditTextName.getText());
+
+                firstName = String.valueOf(textInputEditTextFirstName.getText());
+                lastName = String.valueOf(textInputEditTextLastName.getText());
+                phone = String.valueOf(textInputEditTextPhone.getText());
                 email = String.valueOf(textInputEditTextEmail.getText());
                 password = String.valueOf(textInputEditTextPassword.getText());
 
+
+                //------------------------------------------------------ Connect to DB
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                String url = "http://192.168.3.4/login-registration-android/register.php"; //http://192.168.3.4"; //http://login-registration-android //http://login-registration-android
+                String url = "http://192.168.3.4/php-for-UpMoBank/register.php"; //http://192.168.3.4"; //http://login-registration-android //http://login-registration-android
 
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                         new Response.Listener<String>() {
@@ -81,13 +90,19 @@ public class Registration extends AppCompatActivity {
                 }) {
                     protected Map<String, String> getParams() {
                         Map<String, String> paramV = new HashMap<>();
-                        paramV.put("name", name);
+
+                        paramV.put("firstName", firstName);
+                        paramV.put("lastName", lastName);
+                        paramV.put("phone", phone);
                         paramV.put("email", email);
                         paramV.put("password", password);
                         return paramV;
                     }
                 };
                 queue.add(stringRequest);
+                //------------------------------------------ End DB
+
+
             }
         });
 
