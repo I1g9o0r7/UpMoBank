@@ -2,12 +2,10 @@ package com.example.upmobank;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewStructure;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -21,9 +19,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,8 +29,6 @@ public class Setings extends AppCompatActivity {
     Button buttonChange;
     TextView textViewAccountCode, textViewFirstName, textViewLastName;
     EditText editTextChangeEmailAddress, editTextChangeNumberPhone, editTextChangePassword;
-
-    String phone, email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

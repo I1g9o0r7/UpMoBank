@@ -3,7 +3,6 @@ package com.example.upmobank;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -21,9 +20,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     TextView textViewCodeAcc, textViewUABalance, textViewUSBalance, textViewEUBalance;
     SharedPreferences sharedPreferences;
     Button buttonLogout, buttonSetings, buttonSendMoney, buttonSupport;
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
     Switch switchlock;
 
     @SuppressLint("MissingInflatedId")
@@ -69,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         switchlock.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if (isChecked == true) {
+                if (isChecked) {
                     Toast.makeText(getBaseContext(), "false", Toast.LENGTH_SHORT).show();
                     buttonSendMoney.setOnClickListener(null);
                     buttonSetings.setOnClickListener(null);

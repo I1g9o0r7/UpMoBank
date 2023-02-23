@@ -65,7 +65,7 @@ public class SendMoney extends AppCompatActivity{
 
         editTextMethodSendMoney = findViewById(R.id.editTextMethodSendMoney);
         editTextAmountOfMoney = findViewById(R.id.editTextAmountOfMoney);
-        editTextAmountOfMoney.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(2)}); //, new NegativeDecimalInputFilter()});
+        editTextAmountOfMoney.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(2), new NegativeDecimalInputFilter()});
 
         editTextAmountOfMoney.addTextChangedListener(new TextWatcher(){
             @Override
@@ -77,7 +77,6 @@ public class SendMoney extends AppCompatActivity{
         );
 
         buttonSendMoney = findViewById(R.id.buttonSendMoney);
-
 
         buttonSendMoney.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,6 +154,7 @@ public class SendMoney extends AppCompatActivity{
         choiceMethodSend();
 
         AdapterView.OnItemSelectedListener itemSelectedListener = new AdapterView.OnItemSelectedListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
@@ -198,7 +198,7 @@ public class SendMoney extends AppCompatActivity{
     }
 
     private void choiceMethodSend() {
-        ArrayAdapter<String> adapterMethodsSend = new ArrayAdapter(this, android.R.layout.simple_spinner_item, methodsSend);
+        ArrayAdapter<String> adapterMethodsSend = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, methodsSend);
         adapterMethodsSend.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerMethodsSendChoice.setAdapter(adapterMethodsSend);
     }

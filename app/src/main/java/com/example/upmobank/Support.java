@@ -9,8 +9,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.android.material.textfield.TextInputEditText;
-
 public class Support extends AppCompatActivity {
 
     ImageView imageViewBackToMain3;
