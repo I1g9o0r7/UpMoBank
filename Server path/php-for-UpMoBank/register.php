@@ -7,7 +7,7 @@ if(!empty($_POST['phone']) && !empty($_POST['password']) && !empty($_POST['first
     $email = $_POST['email'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     if($con){
-        $sql = "insert into accounts(phone, password, firstName, lastName, email, balanceUA, balanceUS, balanceEU) values ('".$phone."', '".$password."', '".$firstName."', '".$lastName."', '".$email."', 10000, 1000, 500)";
+        $sql = "insert into accounts(phone, password, firstName, lastName, email, balanceUA, balanceUS, balanceEU) values ('".$phone."', '".$password."', '".$firstName."', '".$lastName."', '".$email."', 10000.01, 1000.02, 500.03)";
         if(mysqli_query($con, $sql)){
             echo "success";
         }else echo "Registration failed";

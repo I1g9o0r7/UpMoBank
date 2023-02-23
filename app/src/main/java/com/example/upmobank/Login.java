@@ -79,7 +79,8 @@ public class Login extends AppCompatActivity {
                                     String status = jsonObject.getString("status");
                                     String message = jsonObject.getString("message");
                                     if (status.equals("success")) {
-                                        numCard = jsonObject.getString("numCard");
+
+                                        numCard = jsonObject.getString("id");
                                         phone = jsonObject.getString("phone");
                                         firstName = jsonObject.getString("firstName");
                                         lastName = jsonObject.getString("lastName");

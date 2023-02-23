@@ -23,7 +23,6 @@
     <string name="_0_00">0.00</string>
     <string name="_0">0</string>
     <string name="exchange_rates">Exchange Rates:</string>
-    <string name="_0000_0000_0000_0000">0000 0000 0000 0000</string>
     <string name="send_money">Send money</string>
     <string name="blocked_functions">Blocked functions</string>
     <string name="setings">Setings</string>
@@ -40,4 +39,6 @@
     <string name="hange_email">Сhange email:</string>
     <string name="change_password">Change password:</string>
     <string name="change">Change</string>
+    <string name="support">Support</string>
+    <string name="update_information">Update information</string>
 </resources>

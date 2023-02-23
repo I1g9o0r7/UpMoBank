@@ -82,9 +82,7 @@ public class Setings extends AppCompatActivity {
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-
-                                System.out.println("================================================================================" + response);
-
+                                System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++=" + response);
                                 if (response.equals("success")) {
                                     Toast.makeText(getApplicationContext(), "Changes successful", Toast.LENGTH_SHORT).show();
 
@@ -113,9 +111,6 @@ public class Setings extends AppCompatActivity {
                         paramV.put("email", editTextChangeEmailAddress.getText().toString());
                         paramV.put("phone", editTextChangeNumberPhone.getText().toString());
                         paramV.put("password", editTextChangePassword.getText().toString());
-                        System.out.println("++++++++++++++++++++++++++=========================================="+editTextChangeEmailAddress.getText().toString());
-                        System.out.println("++++++++++++++++++++++++++=========================================="+editTextChangeNumberPhone.getText().toString());
-                        System.out.println("++++++++++++++++++++++++++=========================================="+sharedPreferences.getString("apiKey", ""));
                         paramV.put("apiKey", sharedPreferences.getString("apiKey", ""));
 
                         return paramV;

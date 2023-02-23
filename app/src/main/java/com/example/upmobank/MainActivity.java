@@ -3,6 +3,7 @@ package com.example.upmobank;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -28,7 +29,7 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView textViewUABalance, textViewUSBalance, textViewEUBalance;
+    TextView textViewCodeAcc, textViewUABalance, textViewUSBalance, textViewEUBalance;
     SharedPreferences sharedPreferences;
     Button buttonLogout, buttonSetings, buttonSendMoney, buttonSupport;
     Switch switchlock;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        textViewCodeAcc = findViewById(R.id.textViewCodeAcc);
         textViewUABalance = findViewById(R.id.textViewUABalance);
         textViewUSBalance = findViewById(R.id.textViewUSBalance);
         textViewEUBalance = findViewById(R.id.textViewEUBalance);
@@ -56,19 +58,12 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
 
-
+        textViewCodeAcc.setText(sharedPreferences.getString("numCard", ""));
+        textViewCodeAcc.setTextIsSelectable(true);
         textViewUABalance.setText(sharedPreferences.getString("balanceUA", ""));
         textViewUSBalance.setText(sharedPreferences.getString("balanceUS", ""));
         textViewEUBalance.setText(sharedPreferences.getString("balanceEU", ""));
-//        textViewName.setText(sharedPreferences.getString("name", ""));
-//        textViewEmail.setText(sharedPreferences.getString("email", ""));
-
-
-//        System.out.println("--------------------------------------------------------------------"+ sharedPreferences.getString("email", ""));
-//        System.out.println("--------------------------------------------------------------------"+ sharedPreferences.getString("name", ""));
-//        System.out.println("--------------------------------------------------------------------"+ sharedPreferences.getString("password", ""));
-//        System.out.println("--------------------------------------------------------------------"+ sharedPreferences.getString("apiKey", ""));
-
+        System.out.println("-----------------------------------------------------------------------------------------------"+sharedPreferences.getString("balanceUS", ""));
 
         setButtonFunctions();
         switchlock.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -79,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
                     buttonSendMoney.setOnClickListener(null);
                     buttonSetings.setOnClickListener(null);
                     buttonLogout.setOnClickListener(null);
+                    buttonSupport.setOnClickListener(null);
                 } else {
                     Toast.makeText(getBaseContext(), "true", Toast.LENGTH_SHORT).show();
                     setButtonFunctions();
@@ -104,12 +100,9 @@ public class MainActivity extends AppCompatActivity {
         buttonSetings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 Intent intent = new Intent(getApplicationContext(), Setings.class);
                 startActivity(intent);
                 //finish();
-
             }
         });
 
@@ -124,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-
+                                System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++=" + response);
                                 if (response.equals("success")) {
                                     SharedPreferences.Editor editor = sharedPreferences.edit();
                                     editor.putString("logged", "");

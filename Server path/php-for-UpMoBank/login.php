@@ -5,7 +5,7 @@ if(!empty($_POST['phone']) && !empty($_POST['password'])){
     $password = $_POST['password'];
     $result = array();
     if($con){
-        $sql = "select * from accounts where phone = '".$phone."'"; //  '".$phone."'";
+        $sql = "select * from accounts where phone = '".$phone."'";
         $res = mysqli_query($con, $sql);
         if(mysqli_num_rows($res) != 0){
             $row = mysqli_fetch_assoc($res);
@@ -19,7 +19,7 @@ if(!empty($_POST['phone']) && !empty($_POST['password'])){
                 if(mysqli_query($con, $sqlUpdate)){
                     $result = array(
                         "status"=>"success", "message" => "Login successful", 
-                        "numCard"=> $row['numCard'], "phone"=>$row['phone'], 
+                        "id"=> $row['id'], "phone"=>$row['phone'], 
                         "firstName"=>$row['firstName'], "lastName"=>$row['lastName'], "email"=>$row['email'],
                         "balanceUA"=>$row['balanceUA'], "balanceUS"=>$row['balanceUS'], "balanceEU"=>$row['balanceEU'],
                         "apiKey"=> $apiKey

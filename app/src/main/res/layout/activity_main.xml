@@ -102,7 +102,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/_0000_0000_0000_0000"
+            android:text="@string/_0"
             android:textSize="18sp" />
     </LinearLayout>
 
@@ -249,26 +249,36 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/logout"
-            android:layout_width="158dp"
+            android:id="@+id/buttonSupport"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="25dp"
-            android:text="@string/logout" />
+            android:text="@string/support" />
 
         <Button
             android:id="@+id/setings"
-            android:layout_width="155dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
             android:text="@string/setings" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/buttonSupport"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:text="Support" />
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="130dp"
+            android:text="@string/logout" />
+    </LinearLayout>
 
 
 </LinearLayout>

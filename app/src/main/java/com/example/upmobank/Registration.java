@@ -26,7 +26,7 @@ public class Registration extends AppCompatActivity {
 
     TextInputEditText textInputEditTextFirstName, textInputEditTextLastName, textInputEditTextPhone, textInputEditTextEmail, textInputEditTextPassword;
     Button buttonSubmit;
-    String firstName, lastName, phone, email, password, numCard;
+    String firstName, lastName, phone, email, password;
     TextView textViewError, textViewLoginNow;
     ProgressBar progressBar;
 
@@ -70,6 +70,7 @@ public class Registration extends AppCompatActivity {
                             @Override
                             public void onResponse(String response) {
                                 progressBar.setVisibility(View.GONE);
+                                System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++=" + response);
                                 if (response.equals("success")) {
                                     Toast.makeText(getApplicationContext(), "Registration successful", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(getApplicationContext(), Login.class);
