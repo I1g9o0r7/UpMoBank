@@ -1,6 +1,6 @@
 <?php
 if(!empty($_POST['phone']) && !empty($_POST['password']) && !empty($_POST['firstName']) && !empty($_POST['lastName']) && !empty($_POST['email'])){
-    $con = mysqli_connect("localhost","root","","dbUpMoBank");
+    $con = mysqli_connect("localhost","root","","UpMoBank");
     $firstName = $_POST['firstName'];
     $lastName = $_POST['lastName'];
     $phone = $_POST['phone'];

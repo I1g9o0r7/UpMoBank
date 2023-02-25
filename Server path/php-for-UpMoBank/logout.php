@@ -2,7 +2,7 @@
 if(!empty($_POST['phone']) && !empty($_POST['apiKey'])){
     $phone = $_POST['phone'];
     $apiKey = $_POST['apiKey'];
-    $con = mysqli_connect("localhost","root","","dbUpMoBank");
+    $con = mysqli_connect("localhost","root","","UpMoBank");
     if($con){
         $sql = "select * from accounts where phone = '".$phone."' and apiKey = '".$apiKey."'";
         $res = mysqli_query($con, $sql);

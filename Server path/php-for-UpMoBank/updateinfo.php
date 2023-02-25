@@ -1,7 +1,7 @@
 <?php
 
 if(!empty($_POST['apiKey'])){
-    $con = mysqli_connect("localhost","root","","dbUpMoBank");
+    $con = mysqli_connect("localhost","root","","UpMoBank");
     $apiKey = $_POST['apiKey'];
     $result = array();
     if($con){

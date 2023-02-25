@@ -1,5 +1,5 @@
 <?php
-$con = mysqli_connect("localhost","root","","dbUpMoBank");
+$con = mysqli_connect("localhost","root","","UpMoBank");
 if($con){
     $sql = "select count(id) from accounts";
     $res = mysqli_query($con, $sql);

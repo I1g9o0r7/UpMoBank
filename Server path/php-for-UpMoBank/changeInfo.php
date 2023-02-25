@@ -1,6 +1,6 @@
 <?php
 if(!empty($_POST['phone']) && !empty($_POST['email']) && !empty($_POST['apiKey'])){
-    $con = mysqli_connect("localhost","root","","dbUpMoBank");
+    $con = mysqli_connect("localhost","root","","UpMoBank");
     $phone = $_POST['phone'];
     $email = $_POST['email'];
     $apiKey = $_POST['apiKey'];
