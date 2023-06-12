@@ -27,7 +27,9 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -38,10 +40,12 @@ public class MainActivity extends AppCompatActivity {
     TextView textViewUSRatesPurchase, textViewUSRatesSale, textViewEURatesPurchase, textViewEURatesSale;
     String dollar_purchase, dollar_sale, euro_purchase, euro_sale;
     SharedPreferences sharedPreferences;
-    Button buttonLogout, buttonSetings, buttonSendMoney, buttonSupport;
+    Button buttonLogout, buttonSetings, buttonSendMoney, buttonSupport, buttonConversion;
     Document doc;
     Thread secThread;
     Runnable runnable;
+
+    List<String> arrayList;
 
 
 
@@ -69,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         buttonLogout = findViewById(R.id.logout);
         buttonSetings = findViewById(R.id.setings);
         buttonSupport = findViewById(R.id.buttonSupport);
+        buttonConversion = findViewById(R.id.buttonConversion);
 
         sharedPreferences = getSharedPreferences("MyAppName", MODE_PRIVATE);
         if (sharedPreferences.getString("logged", "false").equals("false")) {
@@ -93,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
                     buttonSetings.setOnClickListener(null);
                     buttonLogout.setOnClickListener(null);
                     buttonSupport.setOnClickListener(null);
+                    buttonConversion.setOnClickListener(null);
                 } else {
                     Toast.makeText(getBaseContext(), "true", Toast.LENGTH_SHORT).show();
                     setButtonFunctions();
@@ -100,36 +106,32 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
         init();
 
-
-
-        textViewUSRatesPurchase.setText(dollar_purchase);
-        textViewUSRatesSale.setText(dollar_sale);
-        textViewEURatesPurchase.setText(euro_purchase);
-        textViewEURatesSale.setText(euro_sale);
     }
 
-
-
-
-
     void init(){
+
         runnable = new Runnable() {
             @Override
             public void run() {
-                getWeb();
+                String[] rates = getWeb();
+
+                textViewUSRatesPurchase.setText(rates[0]);
+                textViewUSRatesSale.setText(rates[1]);
+                textViewEURatesPurchase.setText(rates[2]);
+                textViewEURatesSale.setText(rates[3]);
+
             }
         };
         secThread = new Thread(runnable);
         secThread.start();
     }
 
-    private void getWeb(){
+    private String[] getWeb(){
         try {
             doc = Jsoup.connect("https://minfin.com.ua/currency/").get();
+            String[] result = new String[4];
 
             Elements tables = doc.getElementsByTag("tbody");
             Element table = tables.get(0);
@@ -137,31 +139,30 @@ public class MainActivity extends AppCompatActivity {
             String dollar_purchase_str = "" + table.children().get(0).children().get(1).text();
             String[] dollar_purchase_elem = dollar_purchase_str.split(" ");
             dollar_purchase = dollar_purchase_elem[0];
+            result[0] = dollar_purchase;
 
             String dollar_sale_str = "" + table.children().get(0).children().get(2).text();
             String[] dollar_sale_elem = dollar_sale_str.split(" ");
             dollar_sale = dollar_sale_elem[0];
+            result[1] = dollar_sale;
 
             String euro_purchase_str = "" + table.children().get(1).children().get(1).text();
             String[] euro_purchase_elem = euro_purchase_str.split(" ");
             euro_purchase = euro_purchase_elem[0];
+            result[2] = euro_purchase;
 
             String euro_sale_str = "" + table.children().get(1).children().get(2).text();
             String[] euro_sale_elem = euro_sale_str.split(" ");
             euro_sale = euro_sale_elem[0];
+            result[3] = euro_sale;
 
-            System.out.println("-----------------------------------------------------------------------------------------------"+dollar_purchase);
-
-            Log.d("MyLog", "Tbody size : " + dollar_purchase);
+            return result;
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
     }
-
-
-
-
 
     private void setButtonFunctions() {
 
@@ -246,7 +247,20 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), Support.class);
                 startActivity(intent);
-                //finish();
+            }
+        });
+
+//        <Button
+//        android:id="@+id/buttonConversion"
+//        android:layout_width="160dp"
+//        android:layout_height="wrap_content"
+//        android:layout_marginEnd="25dp"
+//        android:text="@string/conversion" />
+        buttonConversion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Support.class);
+                startActivity(intent);
             }
         });
 

@@ -287,12 +287,18 @@
         android:layout_marginEnd="20dp"
         android:orientation="horizontal">
 
+<!--        <Button-->
+<!--            android:id="@+id/buttonSupport"-->
+<!--            android:layout_width="160dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginEnd="25dp"-->
+<!--            android:text="@string/support" />-->
+
         <Button
             android:id="@+id/logout"
-            android:layout_width="110dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="130dp"
+            android:layout_marginStart="0dp"
             android:text="@string/logout" />
     </LinearLayout>
 
