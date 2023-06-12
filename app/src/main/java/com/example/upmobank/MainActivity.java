@@ -106,12 +106,6 @@ public class MainActivity extends AppCompatActivity {
 
         init();
 
-
-//        textViewUSRatesPurchase.setText(arrayList.get(0));
-//        textViewUSRatesSale.setText(arrayList.get(1));
-//        textViewEURatesPurchase.setText(arrayList.get(2));
-//        textViewEURatesSale.setText(arrayList.get(3));
-
     }
 
     void init(){
@@ -126,8 +120,6 @@ public class MainActivity extends AppCompatActivity {
         };
         secThread = new Thread(runnable);
         secThread.start();
-
-
 
     }
 
@@ -193,7 +185,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), Setings.class);
                 startActivity(intent);
-                //finish();
             }
         });
 
@@ -213,7 +204,6 @@ public class MainActivity extends AppCompatActivity {
                                     SharedPreferences.Editor editor = sharedPreferences.edit();
                                     editor.putString("logged", "");
 
-
                                     editor.putString("numCard", "");
                                     editor.putString("phone", "");
                                     editor.putString("firstName", "");
@@ -232,7 +222,6 @@ public class MainActivity extends AppCompatActivity {
                                 } else {
                                     Toast.makeText(MainActivity.this, response, Toast.LENGTH_SHORT).show();
                                 }
-
 
                             }
                         }, new Response.ErrorListener() {
@@ -268,7 +257,5 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
-
 }
