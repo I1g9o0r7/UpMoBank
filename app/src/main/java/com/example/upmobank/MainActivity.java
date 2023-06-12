@@ -47,8 +47,6 @@ public class MainActivity extends AppCompatActivity {
 
     List<String> arrayList;
 
-
-
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     Switch switchlock;
 
@@ -108,27 +106,32 @@ public class MainActivity extends AppCompatActivity {
 
         init();
 
+
+//        textViewUSRatesPurchase.setText(arrayList.get(0));
+//        textViewUSRatesSale.setText(arrayList.get(1));
+//        textViewEURatesPurchase.setText(arrayList.get(2));
+//        textViewEURatesSale.setText(arrayList.get(3));
+
     }
 
     void init(){
 
+        arrayList = new ArrayList<>();
+
         runnable = new Runnable() {
             @Override
             public void run() {
-                String[] rates = getWeb();
-
-                textViewUSRatesPurchase.setText(rates[0]);
-                textViewUSRatesSale.setText(rates[1]);
-                textViewEURatesPurchase.setText(rates[2]);
-                textViewEURatesSale.setText(rates[3]);
-
+                getWeb();
             }
         };
         secThread = new Thread(runnable);
         secThread.start();
+
+
+
     }
 
-    private String[] getWeb(){
+    private void getWeb(){
         try {
             doc = Jsoup.connect("https://minfin.com.ua/currency/").get();
             String[] result = new String[4];
@@ -156,7 +159,15 @@ public class MainActivity extends AppCompatActivity {
             euro_sale = euro_sale_elem[0];
             result[3] = euro_sale;
 
-            return result;
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    textViewUSRatesPurchase.setText(result[0]);
+                    textViewUSRatesSale.setText(result[1]);
+                    textViewEURatesPurchase.setText(result[2]);
+                    textViewEURatesSale.setText(result[3]);
+                }
+            });
 
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -250,12 +261,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        <Button
-//        android:id="@+id/buttonConversion"
-//        android:layout_width="160dp"
-//        android:layout_height="wrap_content"
-//        android:layout_marginEnd="25dp"
-//        android:text="@string/conversion" />
         buttonConversion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
