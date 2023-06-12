@@ -21,8 +21,25 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+
         <TextView
-            android:id="@+id/textViewUARates"
+            android:id="@+id/textViewUSRatesPurchase"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/_0"
+            android:textSize="17sp" />
+        <TextView
+            android:id="@+id/textViewSlesh1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="/"
+            android:textSize="17sp" />
+        <TextView
+            android:id="@+id/textViewUSRatesSale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -31,16 +48,23 @@
             android:textSize="17sp" />
 
         <TextView
-            android:id="@+id/textViewUSRates"
+            android:id="@+id/textViewEURatesPurchase"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/_0"
             android:textSize="17sp" />
-
         <TextView
-            android:id="@+id/textViewEURates"
+            android:id="@+id/textViewSlesh2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="/"
+            android:textSize="17sp" />
+        <TextView
+            android:id="@+id/textViewEURatesSale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -54,14 +78,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/textViewRatesUA"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/uaSymbol"
-            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/textViewRatesUS"

@@ -102,7 +102,7 @@ public class SendMoney extends AppCompatActivity{
                     if(Double.parseDouble(editTextAmountOfMoney.getText().toString()) <= Double.parseDouble(sharedPreferences.getString(valute, ""))){
                         amount = editTextAmountOfMoney.getText().toString();
                         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                        String url = "http://192.168.3.4/php-for-UpMoBank/senderSM.php"; //http://192.168.3.4"; //http://login-registration-android //http://login-registration-android
+                        String url = "http://192.168.3.2/php-for-UpMoBank/senderSM.php"; //http://192.168.3.4"; //http://login-registration-android //http://login-registration-android
                         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                                 new Response.Listener<String>() {
                                     @Override

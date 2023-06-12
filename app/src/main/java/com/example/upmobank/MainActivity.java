@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -20,14 +21,30 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+
 
 public class MainActivity extends AppCompatActivity {
 
     TextView textViewCodeAcc, textViewUABalance, textViewUSBalance, textViewEUBalance;
+    TextView textViewUSRatesPurchase, textViewUSRatesSale, textViewEURatesPurchase, textViewEURatesSale;
+    String dollar_purchase, dollar_sale, euro_purchase, euro_sale;
     SharedPreferences sharedPreferences;
     Button buttonLogout, buttonSetings, buttonSendMoney, buttonSupport;
+    Document doc;
+    Thread secThread;
+    Runnable runnable;
+
+
+
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     Switch switchlock;
 
@@ -41,6 +58,11 @@ public class MainActivity extends AppCompatActivity {
         textViewUABalance = findViewById(R.id.textViewUABalance);
         textViewUSBalance = findViewById(R.id.textViewUSBalance);
         textViewEUBalance = findViewById(R.id.textViewEUBalance);
+
+        textViewUSRatesPurchase = findViewById(R.id.textViewUSRatesPurchase);
+        textViewUSRatesSale = findViewById(R.id.textViewUSRatesSale);
+        textViewEURatesPurchase = findViewById(R.id.textViewEURatesPurchase);
+        textViewEURatesSale = findViewById(R.id.textViewEURatesSale);
 
         switchlock = findViewById(R.id.switchLock);
         buttonSendMoney = findViewById(R.id.sendMoney);
@@ -60,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
         textViewUABalance.setText(sharedPreferences.getString("balanceUA", ""));
         textViewUSBalance.setText(sharedPreferences.getString("balanceUS", ""));
         textViewEUBalance.setText(sharedPreferences.getString("balanceEU", ""));
-        System.out.println("-----------------------------------------------------------------------------------------------"+sharedPreferences.getString("balanceUS", ""));
 
         setButtonFunctions();
         switchlock.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -79,7 +100,68 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
+        init();
+
+
+
+        textViewUSRatesPurchase.setText(dollar_purchase);
+        textViewUSRatesSale.setText(dollar_sale);
+        textViewEURatesPurchase.setText(euro_purchase);
+        textViewEURatesSale.setText(euro_sale);
     }
+
+
+
+
+
+    void init(){
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                getWeb();
+            }
+        };
+        secThread = new Thread(runnable);
+        secThread.start();
+    }
+
+    private void getWeb(){
+        try {
+            doc = Jsoup.connect("https://minfin.com.ua/currency/").get();
+
+            Elements tables = doc.getElementsByTag("tbody");
+            Element table = tables.get(0);
+
+            String dollar_purchase_str = "" + table.children().get(0).children().get(1).text();
+            String[] dollar_purchase_elem = dollar_purchase_str.split(" ");
+            dollar_purchase = dollar_purchase_elem[0];
+
+            String dollar_sale_str = "" + table.children().get(0).children().get(2).text();
+            String[] dollar_sale_elem = dollar_sale_str.split(" ");
+            dollar_sale = dollar_sale_elem[0];
+
+            String euro_purchase_str = "" + table.children().get(1).children().get(1).text();
+            String[] euro_purchase_elem = euro_purchase_str.split(" ");
+            euro_purchase = euro_purchase_elem[0];
+
+            String euro_sale_str = "" + table.children().get(1).children().get(2).text();
+            String[] euro_sale_elem = euro_sale_str.split(" ");
+            euro_sale = euro_sale_elem[0];
+
+            System.out.println("-----------------------------------------------------------------------------------------------"+dollar_purchase);
+
+            Log.d("MyLog", "Tbody size : " + dollar_purchase);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+
+
 
     private void setButtonFunctions() {
 
@@ -108,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                String url = "http://192.168.3.4/php-for-UpMoBank/logout.php"; //http://192.168.3.4"; //http://login-registration-android //http://login-registration-android
+                String url = "http://192.168.3.2/php-for-UpMoBank/logout.php"; //http://192.168.3.4"; //http://login-registration-android //http://login-registration-android
 
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                         new Response.Listener<String>() {
