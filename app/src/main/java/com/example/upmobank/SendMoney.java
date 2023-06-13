@@ -66,16 +66,16 @@ public class SendMoney extends AppCompatActivity{
         editTextMethodSendMoney = findViewById(R.id.editTextMethodSendMoney);
         editTextAmountOfMoney = findViewById(R.id.editTextAmountOfMoney);
 
-        //editTextAmountOfMoney.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(2)});//, new NegativeDecimalInputFilter()});
+        editTextAmountOfMoney.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(2)});//, new NegativeDecimalInputFilter()});
 
-//        editTextAmountOfMoney.addTextChangedListener(new TextWatcher(){
-//            @Override
-//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                if(s.toString().matches("^-")){editTextAmountOfMoney.setText("");}}
-//            @Override
-//            public void afterTextChanged(Editable editable) {}}
-//        );
+        editTextAmountOfMoney.addTextChangedListener(new TextWatcher(){
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(s.toString().matches("^-")){editTextAmountOfMoney.setText("");}}
+            @Override
+            public void afterTextChanged(Editable editable) {}}
+        );
 
         buttonSendMoney = findViewById(R.id.buttonSendMoney);
 
